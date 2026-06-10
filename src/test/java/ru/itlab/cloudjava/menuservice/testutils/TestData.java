@@ -3,9 +3,12 @@ package ru.itlab.cloudjava.menuservice.testutils;
 import ru.itlab.cloudjava.menuservice.dto.UpdateMenuRequest;
 import ru.itlab.cloudjava.menuservice.storage.model.Ingredient;
 import ru.itlab.cloudjava.menuservice.storage.model.IngredientCollection;
+import ru.itlab.cloudjava.menuservice.storage.model.MenuItem_;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import static ru.itlab.cloudjava.menuservice.testutils.TestConstants.*;
 
@@ -23,12 +26,21 @@ public class TestData {
 
     public static UpdateMenuRequest updateMenuFullRequest() {
         return UpdateMenuRequest.builder()
-                .name("New Cappuccino")
-                .price(BigDecimal.valueOf(100.01))
-                .timeToCook(2000L)
-                .description("New Cappuccino Description")
-                .imageUrl("http://images.com/new_cappuccino.png")
+                .name(ESPRESSO_NAME)
+                .price(ESPRESSO_PRICE)
+                .timeToCook(ESPRESSO_TIME_TO_COOK)
+                .description(ESPRESSO_DESCRIPTION)
+                .imageUrl(ESPRESSO_IMAGE_URL)
                 .build();
     }
 
+    public static Stream<Map.Entry<String, UpdateMenuRequest>> updateMenuPartialRequests() {
+        return Stream.of(
+                Map.entry(MenuItem_.NAME, UpdateMenuRequest.builder().name(ESPRESSO_NAME).build()),
+                Map.entry(MenuItem_.PRICE, UpdateMenuRequest.builder().price(ESPRESSO_PRICE).build()),
+                Map.entry(MenuItem_.TIME_TO_COOK, UpdateMenuRequest.builder().timeToCook(ESPRESSO_TIME_TO_COOK).build()),
+                Map.entry(MenuItem_.DESCRIPTION, UpdateMenuRequest.builder().description(ESPRESSO_DESCRIPTION).build()),
+                Map.entry(MenuItem_.IMAGE_URL, UpdateMenuRequest.builder().imageUrl(ESPRESSO_IMAGE_URL).build())
+        );
+    }
 }
