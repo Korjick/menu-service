@@ -1,0 +1,58 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.0.6'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'ru.itlab.cloudjava'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '25'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	jpaModelGenVersion = '7.4.0.Final'
+	hypersistenceVersion = '3.15.3'
+	mapstructVersion = '1.5.5.Final'
+	mapstructLombokBindingVersion = '0.2.0'
+	springdocVersion = '3.0.3'
+	testContainersVersion = '1.21.4'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.flywaydb:flyway-core'
+	implementation "io.hypersistence:hypersistence-utils-hibernate-63:${hypersistenceVersion}"
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor "org.hibernate.orm:hibernate-processor:${jpaModelGenVersion}"
+	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapstructLombokBindingVersion}"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	testImplementation "org.testcontainers:junit-jupiter:${testContainersVersion}"
+	testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
+	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
