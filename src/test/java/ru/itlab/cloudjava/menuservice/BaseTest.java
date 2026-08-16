@@ -8,6 +8,8 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -40,6 +42,7 @@ public abstract class BaseTest {
     protected <T, R> void assertFieldsEquality(T item, R dto, String... fields) {
         assertFieldsExistence(item, dto, fields);
         assertThat(item).usingRecursiveComparison()
+                .withComparatorForType(BigDecimal::compareTo, BigDecimal.class)
                 .comparingOnlyFields(fields)
                 .isEqualTo(dto);
     }
@@ -67,5 +70,10 @@ public abstract class BaseTest {
         } catch (NoSuchFieldException e) {
             return null;
         }
+    }
+
+    protected LocalDateTime getNormalizedNow() {
+        // Вычитаем наносекунды из-за ограничений точности Postgres
+        return LocalDateTime.now().minusNanos(1000);
     }
 }
