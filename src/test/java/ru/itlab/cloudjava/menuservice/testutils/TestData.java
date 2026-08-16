@@ -1,11 +1,12 @@
 package ru.itlab.cloudjava.menuservice.testutils;
 
+import ru.itlab.cloudjava.menuservice.dto.CreateMenuRequest;
 import ru.itlab.cloudjava.menuservice.dto.UpdateMenuRequest;
+import ru.itlab.cloudjava.menuservice.storage.model.Category;
 import ru.itlab.cloudjava.menuservice.storage.model.Ingredient;
 import ru.itlab.cloudjava.menuservice.storage.model.IngredientCollection;
 import ru.itlab.cloudjava.menuservice.storage.model.MenuItem_;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -42,5 +43,18 @@ public class TestData {
                 Map.entry(MenuItem_.DESCRIPTION, UpdateMenuRequest.builder().description(ESPRESSO_DESCRIPTION).build()),
                 Map.entry(MenuItem_.IMAGE_URL, UpdateMenuRequest.builder().imageUrl(ESPRESSO_IMAGE_URL).build())
         );
+    }
+
+    public static CreateMenuRequest createMenuRequest() {
+        return CreateMenuRequest.builder()
+                .name(ITALIAN_SALAD_NAME)
+                .description(ITALIAN_SALAD_DESCRIPTION)
+                .price(ITALIAN_SALAD_PRICE)
+                .category(Category.SALADS)
+                .timeToCook(ITALIAN_SALAD_TIME_TO_COOK)
+                .weight(ITALIAN_SALAD_WEIGHT)
+                .imageUrl(ITALIAN_SALAD_IMAGE_URL)
+                .ingredientCollection(italianSaladIngredients())
+                .build();
     }
 }

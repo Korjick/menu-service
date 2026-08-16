@@ -1,0 +1,29 @@
+server:
+  port: 9091
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 3s
+    keep-alive-timeout: 20s
+    threads:
+      max: 200
+      min-spare: 10
+spring:
+  application:
+    name: menu-service
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:15432/menu_service_db
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 12
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true

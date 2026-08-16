@@ -23,5 +23,4 @@ public class TestConstants {
     public static final int ITALIAN_SALAD_GREENS_INGREDIENT_CALORIES = 100;
     public static final String ITALIAN_SALAD_TOMATOES_INGREDIENT = "tomatoes";
     public static final int ITALIAN_SALAD_TOMATOES_INGREDIENT_CALORIES = 200;
-
 }
