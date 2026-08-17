@@ -1,13 +1,37 @@
-<h3>Menu Service</h3>
-<h4>Provides a REST API for CRUD operations on menu items:</h4>
-<ul class="mt-2">
-<li class="mt-2"><i>POST /v1/menu-items</i> - create a menu item; item details are passed in the request body. Available to staff members; staff information is passed in the access token. 
-</li>
-<li class="mt-2"><i>DELETE /v1/menu-items/{id}</i> - delete a menu item. Available to staff members; staff information is passed in the access token.</li>
-<li class="mt-2"><i>PATCH /v1/menu-items/{id}</i> - update a menu item; update parameters are passed in the request body. Available to staff members; staff information is passed in the access token.
-</li>
-<li class="mt-2"><i>GET /v1/menu-items/{id}</i> - retrieve a menu item. Available to all users.</li>
-<li class="mt-2"><i>GET /v1/menu-items?category={category}&sort={sort}</i> - retrieve a list of menu items from a selected category, sorted alphabetically (AZ, ZA), by price (PRICE_ASC, PRICE_DESC), or by creation date (DATE_ASC, DATE_DESC). Available to all users.
-</li>
-</ul>
-Data is stored in a PostgreSQL 16 relational database.
+# Menu Service
+
+A RESTful microservice for managing restaurant menu items, categories, and ingredients.
+
+## Tech Stack
+
+- **Language & Framework:** Java 25, Spring Boot 4
+- **Persistence:** Spring Data JPA, Hibernate, Hypersistence Utils (JSONB)
+- **Database & Migrations:** PostgreSQL, Flyway
+- **Mapping & Utilities:** MapStruct, Lombok
+- **Documentation:** SpringDoc OpenAPI (Swagger UI)
+- **Testing:** JUnit 5, Testcontainers (`@ServiceConnection`), AssertJ, WebTestClient
+- **Containerization:** Cloud Native Buildpacks
+
+## API Endpoints
+
+- `POST /v1/menu-items` - Create a new menu item.
+- `GET /v1/menu-items/{id}` - Retrieve a menu item by ID.
+- `GET /v1/menu-items?category={category}&sort={sort}` - Retrieve items filtered by category and sorted (`AZ`, `ZA`, `PRICE_ASC`, `PRICE_DESC`, `DATE_ASC`, `DATE_DESC`).
+- `POST /v1/menu-items/menu-info` - Retrieve menu items info and prices for an order by item names.
+- `PATCH /v1/menu-items/{id}` - Partially update menu item details.
+- `DELETE /v1/menu-items/{id}` - Delete a menu item by ID.
+
+## Build and Run
+
+```bash
+# Run tests
+./gradlew test
+
+# Run application
+./gradlew bootRun
+
+# Build and run containerized application
+./gradlew bootBuildImage
+cd ./docker
+docker compose up -d
+```
