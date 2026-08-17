@@ -6,16 +6,18 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itlab.menuservice.dto.CreateMenuRequest;
-import ru.itlab.menuservice.dto.MenuItemDto;
-import ru.itlab.menuservice.dto.SortBy;
-import ru.itlab.menuservice.dto.UpdateMenuRequest;
+import ru.itlab.menuservice.dto.*;
 import ru.itlab.menuservice.exception.MenuServiceException;
 import ru.itlab.menuservice.mapper.MenuItemMapper;
 import ru.itlab.menuservice.storage.model.Category;
+import ru.itlab.menuservice.storage.model.MenuItemProjection;
 import ru.itlab.menuservice.storage.repositories.MenuItemRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -70,5 +72,21 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<MenuItemDto> getMenusFor(Category category, SortBy sortBy) {
         return mapper.toDtoList(repository.getMenusFor(category, sortBy));
+    }
+
+    @Override
+    public OrderMenuResponse getMenusForOrder(OrderMenuRequest request) {
+        Map<String, MenuItemProjection> nameToProjection = repository.getMenuInfoForNames(request.getMenuNames()).stream()
+                .collect(Collectors.toMap(MenuItemProjection::getName, Function.identity()));
+        List<MenuInfo> menuInfos = new ArrayList<>();
+        for(String name: request.getMenuNames()) {
+            if (nameToProjection.containsKey(name)) {
+                var projection = nameToProjection.get(name);
+                menuInfos.add(new MenuInfo(projection.getName(), projection.getPrice(), true));
+            } else {
+                menuInfos.add(new MenuInfo(name, null, false));
+            }
+        }
+        return OrderMenuResponse.builder().menuInfos(menuInfos).build();
     }
 }

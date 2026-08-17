@@ -11,6 +11,10 @@ java {
 	sourceCompatibility = '25'
 }
 
+jar {
+	enabled = false
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -54,6 +58,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-webtestclient'
 	testImplementation 'org.springframework.boot:spring-boot-webmvc-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+}
+
+bootBuildImage {
+	imageName = "${project.name}"
+	environment = ["BP_JVM_VERSION": "25.*"]
 }
 
 tasks.named('test') {
