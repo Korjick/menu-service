@@ -3,14 +3,18 @@ package ru.itlab.cloudjava.menuservice.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.itlab.cloudjava.menuservice.storage.model.Category;
 import ru.itlab.cloudjava.menuservice.storage.model.IngredientCollection;
 
 import java.math.BigDecimal;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class CreateMenuRequest {
     @NotBlank(message = "Название не должно быть пустым.")

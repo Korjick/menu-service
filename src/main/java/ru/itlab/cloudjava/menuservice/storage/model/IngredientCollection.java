@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class IngredientCollection implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

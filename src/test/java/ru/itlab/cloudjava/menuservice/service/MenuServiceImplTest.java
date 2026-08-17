@@ -1,13 +1,11 @@
-package ru.itlab.cloudjava.menuservice.service.impl;
+package ru.itlab.cloudjava.menuservice.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import ru.itlab.cloudjava.menuservice.BaseTest;
+import ru.itlab.cloudjava.menuservice.BaseIntegrationTest;
 import ru.itlab.cloudjava.menuservice.dto.MenuItemDto;
 import ru.itlab.cloudjava.menuservice.dto.SortBy;
 import ru.itlab.cloudjava.menuservice.exception.MenuServiceException;
-import ru.itlab.cloudjava.menuservice.service.MenuService;
 import ru.itlab.cloudjava.menuservice.storage.model.Category;
 import ru.itlab.cloudjava.menuservice.storage.repositories.MenuItemRepository;
 import ru.itlab.cloudjava.menuservice.testutils.TestData;
@@ -17,8 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
-public class MenuServiceImplTest extends BaseTest {
+public class MenuServiceImplTest extends BaseIntegrationTest {
 
     @Autowired
     private MenuService menuService;

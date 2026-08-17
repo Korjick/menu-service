@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class Ingredient implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

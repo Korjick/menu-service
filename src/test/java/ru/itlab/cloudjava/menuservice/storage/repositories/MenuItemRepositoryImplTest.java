@@ -9,14 +9,13 @@ import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itlab.cloudjava.menuservice.BaseTest;
+import ru.itlab.cloudjava.menuservice.BaseDataTest;
 import ru.itlab.cloudjava.menuservice.dto.SortBy;
 import ru.itlab.cloudjava.menuservice.dto.UpdateMenuRequest;
 import ru.itlab.cloudjava.menuservice.storage.model.Category;
 import ru.itlab.cloudjava.menuservice.storage.model.MenuItem;
 import ru.itlab.cloudjava.menuservice.storage.repositories.updaters.MenuAttrUpdaterConfig;
 import ru.itlab.cloudjava.menuservice.testutils.TestData;
-import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import ru.itlab.cloudjava.menuservice.storage.model.MenuItem_;
 
 import java.util.List;
@@ -25,11 +24,10 @@ import java.util.Map;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-@DataJpaTest
 @Import(MenuAttrUpdaterConfig.class)
 @Transactional(propagation = Propagation.NEVER)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class MenuItemRepositoryImplTest extends BaseTest {
+class MenuItemRepositoryImplTest extends BaseDataTest {
     @Autowired
     private MenuItemRepository menuItemRepository;
 
