@@ -2,6 +2,8 @@
 
 A RESTful microservice for managing restaurant menu items, categories, and ingredients.
 
+Part of: https://github.com/topics/korjick-java-microservice-restaurant
+
 ## Tech Stack
 
 - **Language & Framework:** Java 25, Spring Boot 4
